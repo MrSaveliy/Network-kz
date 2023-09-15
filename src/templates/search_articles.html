@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+    const searchArticles = () => {
+        const searchInputValue = document.getElementById("articles_search").value;
+        window.location.href = `/pages/search_articles/${searchInputValue}`;
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-center flex-col items-center">
+    <div class="flex my-3 gap-5">
+        <input id="articles_search" type="text" placeholder="ИФ" class="text-xl">
+        <button onclick="searchArticles()" class="border-2 rounded-3xl bg-gray-300 p-3">Поиск</button>
+    </div>
+    <span>Например, Вадимир Ким</span>
+    {% for article in articles %}
+        <div class="flex rounded-3 border-2 p-3 mt-5">
+            <div class="flex flex-col">
+                <span class="text-2xl font-bold">{{ article.title }}</span>
+                <span class="text-lg">{{ article.subtitle}}</span>
+                <span class="text-lg">{{ article.url}}</span>
+                <span class="text-lg">{{ article.date}}</span>
+                <span class="text-lg">{{ article.text}}</span>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
